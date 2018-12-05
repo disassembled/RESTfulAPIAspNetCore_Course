@@ -23,6 +23,8 @@ namespace Library.API.Controllers
         // api/authors
         public IActionResult GetAuthors()
         {
+            // throw new Exception("Fake exception for testing"); // this would trigger the global exception handling in Startup.cs
+
             var authorsFromRepo = _libraryRepository.GetAuthors();
             var authors = Mapper.Map<IEnumerable<AuthorDto>>(authorsFromRepo);
             return Ok(authors);

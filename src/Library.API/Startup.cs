@@ -57,7 +57,13 @@ namespace Library.API
             }
             else
             {
-                app.UseExceptionHandler();
+                app.UseExceptionHandler(appBuilder => {
+                    appBuilder.Run(async context =>
+                    {
+                        context.Response.StatusCode = 500;
+                        await context.Response.WriteAsync("An unexpected fault happened. Please try again later.");
+                    });
+                });
             }
 
             AutoMapper.Mapper.Initialize(cfg => {
